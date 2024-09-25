@@ -1,0 +1,22 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:glowstone_dust",
+    "neage:white_glowstone_dust",
+    "neage:light_gray_glowstone_dust",
+    "neage:gray_glowstone_dust",
+    "neage:black_glowstone_dust",
+    "neage:red_glowstone_dust",
+    "neage:orange_glowstone_dust",
+    "neage:yellow_glowstone_dust",
+    "neage:lime_glowstone_dust",
+    "neage:green_glowstone_dust",
+    "neage:cyan_glowstone_dust",
+    "neage:light_blue_glowstone_dust",
+    "neage:blue_glowstone_dust",
+    "neage:purple_glowstone_dust",
+    "neage:magenta_glowstone_dust",
+    "neage:pink_glowstone_dust",
+    "neage:brown_glowstone_dust"
+  ]
+}
