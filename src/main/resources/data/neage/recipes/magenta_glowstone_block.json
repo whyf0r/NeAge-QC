@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "DD",
+        "DD"
+    ],
+    "key": {
+        "D": {
+            "item": "neage:magenta_glowstone_dust"
+        }
+    },
+    "result": {
+        "id": "neage:magenta_glowstone_block",
+        "count": 1
+    }
+}

@@ -1,0 +1,50 @@
+{
+  "item.neage.white_glowstone_dust": "White Glowstone Dust",
+  "block.neage.white_glowstone_block": "White Glowstone",
+  
+  "item.neage.light_gray_glowstone_dust": "Light Gray Glowstone Dust",
+  "block.neage.light_gray_glowstone_block": "Light Gray Glowstone",
+  
+  "item.neage.gray_glowstone_dust": "Gray Glowstone Dust",
+  "block.neage.gray_glowstone_block": "Gray Glowstone",
+  
+  "item.neage.black_glowstone_dust": "Black Glowstone Dust",
+  "block.neage.black_glowstone_block": "Black Glowstone",
+  
+  "item.neage.brown_glowstone_dust": "Brown Glowstone Dust",
+  "block.neage.brown_glowstone_block": "Brown Glowstone",
+  
+  "item.neage.red_glowstone_dust": "Red Glowstone Dust",
+  "block.neage.red_glowstone_block": "Red Glowstone",
+  
+  "item.neage.orange_glowstone_dust": "Orange Glowstone Dust",
+  "block.neage.orange_glowstone_block": "Orange Glowstone",
+  
+  "item.neage.yellow_glowstone_dust": "Yellow Glowstone Dust",
+  "block.neage.yellow_glowstone_block": "Yellow Glowstone",
+  
+  "item.neage.lime_glowstone_dust": "Lime Glowstone Dust",
+  "block.neage.lime_glowstone_block": "Lime Glowstone",
+  
+  "item.neage.green_glowstone_dust": "Green Glowstone Dust",
+  "block.neage.green_glowstone_block": "Green Glowstone",
+  
+  "item.neage.cyan_glowstone_dust": "Cyan Glowstone Dust",
+  "block.neage.cyan_glowstone_block": "Cyan Glowstone",
+  
+  "item.neage.light_blue_glowstone_dust": "Light Blue Glowstone Dust",
+  "block.neage.light_blue_glowstone_block": "Light Blue Glowstone",
+  
+  "item.neage.blue_glowstone_dust": "Blue Glowstone Dust",
+  "block.neage.blue_glowstone_block": "Blue Glowstone",
+  
+  "item.neage.purple_glowstone_dust": "Purple Glowstone Dust",
+  "block.neage.purple_glowstone_block": "Purple Glowstone",
+  
+  "item.neage.magenta_glowstone_dust": "Magenta Glowstone Dust",
+  "block.neage.magenta_glowstone_block": "Magenta Glowstone",
+  
+  "item.neage.pink_glowstone_dust": "Pink Glowstone Dust",
+  "block.neage.pink_glowstone_block": "Pink Glowstone"
+}
+

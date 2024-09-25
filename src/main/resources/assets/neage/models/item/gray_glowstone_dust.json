@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+      "layer0": "neage:item/gray_glowstone_dust"
+    }
+  }
+  
