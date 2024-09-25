@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "neage:block/flint_block" }
+  }
+}

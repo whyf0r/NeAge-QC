@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        {
+            "item": "neage:flint_block"
+        }
+    ],
+    "result": {
+        "id": "minecraft:flint",
+        "count": 9
+    }
+}

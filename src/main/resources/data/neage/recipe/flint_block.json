@@ -3,15 +3,16 @@
     "category": "misc",
     "key": {
         "A": {
-            "item": "neage:black_glowstone_dust"
+            "item": "minecraft:flint"
         }
     },
     "pattern": [
-        "AA",
-        "AA"
+        "AAA",
+        "AAA",
+        "AAA"
     ],
     "result": {
         "count": 1,
-        "id": "neage:black_glowstone_block"
+        "id": "neage:flint_block"
 }
 }
