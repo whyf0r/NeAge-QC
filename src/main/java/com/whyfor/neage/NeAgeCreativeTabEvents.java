@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = NeAge.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModCreativeTabEvents {
+public class NeAgeCreativeTabEvents {
     
     // Список цветов для сортировки в порядке
     public static final String[] COLOR_ORDER = {
@@ -25,6 +25,7 @@ public class ModCreativeTabEvents {
         // Добавляем блок кремния во вкладку строительных блоков
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(new ItemStack(NeAgeBlocks.FLINT_BLOCK.get()));
+            event.accept(new ItemStack(NeAgeBlocks.DOMEN_BLAST_FURNACE.get()));
         }
         // Добавляем цветную пыль светокамня в ингредиенты
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {

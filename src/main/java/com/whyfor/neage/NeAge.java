@@ -1,8 +1,10 @@
 package com.whyfor.neage;
 
+import com.whyfor.neage.entity.NeAgeTileEntities;
 import com.whyfor.neage.blocks.NeAgeBlocks;
 import com.whyfor.neage.container.MultiBlockContainer;
 import com.whyfor.neage.items.NeAgeItems;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,13 +25,11 @@ public class NeAge{
           NeAgeItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
           NeAgeBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
           NeAgeBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+          NeAgeTileEntities.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus())
 
     // Регистрируем событие для Forge
     MinecraftForge.EVENT_BUS.register(this);
     }
-    public static final RegistryObject<ContainerType<MultiBlockContainer>> MULTIBLOCK_CONTAINER =
-            CONTAINERS.register("multiblock_container",
-                    () -> IForgeContainerType.create(MultiBlockContainer::new));
 
     // Пример события на сервере
     @Mod.EventBusSubscriber(modid = NeAge.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

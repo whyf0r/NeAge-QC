@@ -1,5 +1,6 @@
 package com.whyfor.neage.container;
 
+import com.whyfor.neage.blocks.NeAgeBlocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -17,6 +18,6 @@ public class MultiBlockContainer extends Container {
     @Override
     public boolean stillValid(PlayerEntity player) {
         // Проверяем, может ли игрок взаимодействовать с блоком
-        return stillValid(this.canInteractWithCallable, player, MyModBlocks.MULTIBLOCK_CONTROLLER.get());
+        return stillValid(this.canInteractWithCallable, player, NeAgeBlocks.MULTIBLOCK_CONTROLLER.get());
     }
 }
