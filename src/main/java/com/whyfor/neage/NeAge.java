@@ -1,6 +1,7 @@
 package com.whyfor.neage;
 
 import com.whyfor.neage.blocks.NeAgeBlocks;
+import com.whyfor.neage.container.MultiBlockContainer;
 import com.whyfor.neage.items.NeAgeItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,6 +17,7 @@ public class NeAge{
 
     // Конструктор мода
     @SuppressWarnings("removal")
+
     public NeAge() {
           // Регистрируем предметы и блоки
           NeAgeItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -25,6 +27,9 @@ public class NeAge{
     // Регистрируем событие для Forge
     MinecraftForge.EVENT_BUS.register(this);
     }
+    public static final RegistryObject<ContainerType<MultiBlockContainer>> MULTIBLOCK_CONTAINER =
+            CONTAINERS.register("multiblock_container",
+                    () -> IForgeContainerType.create(MultiBlockContainer::new));
 
     // Пример события на сервере
     @Mod.EventBusSubscriber(modid = NeAge.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

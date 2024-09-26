@@ -39,6 +39,14 @@ public class NeAgeBlocks {
             () -> new Block(BlockBehaviour.Properties.of().strength(0.3F).sound(SoundType.STONE))
     );
 
+    // Главный блок мультблока
+    public static final RegistryObject<Block> MULTIBLOCK_CONTROLLER = BLOCKS.register("multiblock_controller",
+            () -> new Block(Block.Properties.of().strength(3.5F)));
+
+    // Добавляем другие блоки мультблока
+    public static final RegistryObject<Block> MULTIBLOCK_PART = BLOCKS.register("multiblock_part",
+            () -> new Block(Block.Properties.of().strength(3.5F)));
+
     // Регистрация предметов для блоков (включая блоки машин)
     public static final RegistryObject<Item> FLINT_BLOCK_ITEM = ITEMS.register("flint_block",
             () -> new BlockItem(FLINT_BLOCK.get(), new Item.Properties()));
