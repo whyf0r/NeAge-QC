@@ -26,46 +26,33 @@ public class NeAge {
     public NeAge() {
         // Регистрация файла конфигурации
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, NeAgeConfig.COMMON_CONFIG);
-
-        // Регистрация событий для Forge и FML
+        // Регистрация событий
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
+        MinecraftForge.EVENT_BUS.register(this);
         // Регистрация предметов, блоков и т.д.
         NeAgeItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         NeAgeBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         NeAgeBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         NeAgeTileEntities.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         NeAgeMenuTypes.MENUS.register(FMLJavaModLoadingContext.get().getModEventBus());
-
-        // Слушатель загрузки конфигурации
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onConfigLoaded);
-
-        // Регистрация событий Forge
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        // Код настройки мода
+        MinecraftForge.EVENT_BUS.addListener(this::onConfigLoad);
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
-        // Клиентские настройки (если требуются)
-    }
-
-    private void onConfigLoaded(final ModConfigEvent.Loading event) {
+    private void onConfigLoad(final ModConfigEvent.Loading event) {
         if (event.getConfig().getSpec() == NeAgeConfig.COMMON_CONFIG) {
-            // Регистрация всех объектов в зависимости от конфигурации
-            RegistrationHandler.registerAll();
+            // Использование значений конфигурации
+            if (NeAgeConfig.ENABLE_DOMEN_BLAST_FURNACE.get()) {
+                NeAgeBlocks.registerDomenBlastFurnace();
+            }
+            if (NeAgeConfig.ENABLE_COMMAND_OPEN_MENU.get()) {
+                MinecraftForge.EVENT_BUS.addListener(RegistrationHandler::onRegisterCommands);
+            }
         }
+    }
+}
 
-        }
-
-    @Mod.EventBusSubscriber(modid = NeAge.MOD_ID)
-    public static class ModEvents {
-        @SubscribeEvent
-        public static void onRegisterCommands(RegisterCommandsEvent event) {
-            OpenMenuCommand.register(event.getDispatcher());
-        }}
 
 
