@@ -1,9 +1,11 @@
 package com.whyfor.neage.blocks;
 
+import com.whyfor.neage.entity.DomenBlastFurnaceTileEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+import com.whyfor.neage.NeAgeConfig;
 
 @Mod.EventBusSubscriber(modid = NeAge.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NeAgeBlocks {
@@ -21,17 +24,12 @@ public class NeAgeBlocks {
             "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"
     };
 
-
-
-    // DeferredRegister для блоков
+    // Регистрация предметов и блоков.
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, NeAge.MOD_ID);
-
-    // DeferredRegister для предметов
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, NeAge.MOD_ID);
 
-    // Карта для регистрации цветных блоков светокамня
+    // Регистрация карты предметов и блоков.
     public static final Map<String, RegistryObject<Block>> COLORED_GLOWSTONE_BLOCKS = new HashMap<>();
-
     public static final Map<String, Integer> GLOWSTONE_LIGHT_LEVELS = new HashMap<>();
 
     // Регистрация блока кремня
@@ -39,16 +37,24 @@ public class NeAgeBlocks {
             () -> new Block(BlockBehaviour.Properties.of().strength(0.3F).sound(SoundType.STONE))
     );
 
-    // Регистрация доменной печи
-    public static final RegistryObject<Block> DOMEN_BLAST_FURNACE = BLOCKS.register("domen_blast_furnace",
-            () -> new DomenBlastFurnaceBlock(Block.Properties.of()
-                    .strength(5.0F, 6.0F).requiresCorrectToolForDrops()));
+    // // Описание изменений: Объявление переменной DOMEN_BLAST_FURNACE как статической.
+    public static RegistryObject<Block> DOMEN_BLAST_FURNACE;
 
-    // Регистрация предмета-блока
-    public static final RegistryObject<Item> DOMEN_BLAST_FURNACE_ITEM = ITEMS.register("domen_blast_furnace",
-            () -> new BlockItem(DOMEN_BLAST_FURNACE.get(), new Item.Properties()));
+    // Регистрация блока доменной печи
+    public static void registerDomenBlastFurnace() {
+        DOMEN_BLAST_FURNACE = BLOCKS.register("domen_blast_furnace",
+                () -> new Block(BlockBehaviour.Properties.of().strength(5.0F).requiresCorrectToolForDrops()));
 
-    // Регистрация предметов для блоков (включая блоки машин)
+        // Регистрация предмета для доменной печи
+        ITEMS.register("domen_blast_furnace", () -> new BlockItem(DOMEN_BLAST_FURNACE.get(), new Item.Properties()));
+
+        // Регистрация плиточной сущности
+        BlockEntityType<DomenBlastFurnaceTileEntity> DOMEN_BLAST_FURNACE_TILE = BlockEntityType.Builder.of(
+                DomenBlastFurnaceTileEntity::new, DOMEN_BLAST_FURNACE.get()).build(null);
+        // Здесь зарегистрируйте плиточную сущность, если необходимо
+    }
+
+    // Регистрация предметов для блоков
     public static final RegistryObject<Item> FLINT_BLOCK_ITEM = ITEMS.register("flint_block",
             () -> new BlockItem(FLINT_BLOCK.get(), new Item.Properties()));
 
@@ -71,22 +77,21 @@ public class NeAgeBlocks {
         GLOWSTONE_LIGHT_LEVELS.put("black", 5);
     }
 
-    // Регистрация блоков в цикле с различным уровнем свечения
-    for(String color : COLORS)
+        // Регистрация блоков в цикле с различным уровнем свечения
+        for(String color : COLORS)
 
-    {
-        int lightLevel = GLOWSTONE_LIGHT_LEVELS.getOrDefault(color, 15);  // Получаем уровень свечения для каждого цвета
+        {
+            int lightLevel = GLOWSTONE_LIGHT_LEVELS.getOrDefault(color, 15);  // Получаем уровень свечения для каждого цвета
 
-        // Регистрация блока
-        RegistryObject<Block> block = BLOCKS.register(color + "_glowstone_block",
-                () -> new Block(BlockBehaviour.Properties.of().strength(0.3F).lightLevel((state) -> lightLevel).sound(SoundType.GLASS))
-        );
+            // Регистрация блока
+            RegistryObject<Block> block = BLOCKS.register(color + "_glowstone_block",
+                    () -> new Block(BlockBehaviour.Properties.of().strength(0.3F).lightLevel((state) -> lightLevel).sound(SoundType.GLASS))
+            );
 
-        COLORED_GLOWSTONE_BLOCKS.put(color, block);
+            COLORED_GLOWSTONE_BLOCKS.put(color, block);
 
-        // Регистрация BlockItem для этого блока
-        ITEMS.register(color + "_glowstone_block", () -> new BlockItem(block.get(), new Item.Properties()));
+            // Регистрация BlockItem для этого блока
+            ITEMS.register(color + "_glowstone_block", () -> new BlockItem(block.get(), new Item.Properties()));
+        }
     }
-}
-
 }
