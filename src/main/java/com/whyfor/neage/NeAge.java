@@ -11,11 +11,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-// Уникальный идентификатор мода должен совпадать с modId в файле mods.toml
-@Mod("neage")
+@Mod(NeAge.MOD_ID)
 public class NeAge {
 
     public static final String MOD_ID = "neage";
@@ -23,9 +24,12 @@ public class NeAge {
     // Конструктор мода
     @SuppressWarnings("removal")
     public NeAge() {
+        // Регистрация файла конфигурации
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, NeAgeConfig.COMMON_CONFIG);
 
-        // Регистрация событий для Forge
-        MinecraftForge.EVENT_BUS.register(this);
+        // Регистрация событий для Forge и FML
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         // Регистрация предметов, блоков и т.д.
         NeAgeItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -34,42 +38,34 @@ public class NeAge {
         NeAgeTileEntities.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         NeAgeMenuTypes.MENUS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        // Добавление слушателя событий
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        // Слушатель загрузки конфигурации
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onConfigLoaded);
 
-        // Регистрация файла конфигурации
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, NeAgeConfig.COMMON_CONFIG);
+        // Регистрация событий Forge
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        // Проверка и регистрация доменной печи
-        if (NeAgeConfig.ENABLE_DOMEN_BLAST_FURNACE.get()) {
-            NeAgeBlocks.registerDomenBlastFurnace();
-        }
-
-        // Проверка и регистрация команды openmenu
-        if (NeAgeConfig.ENABLE_COMMAND_OPEN_MENU.get()) {
-            MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
-        }
+        // Код настройки мода
     }
 
-    // Метод для регистрации команды openmenu
-    private void registerCommands(RegisterCommandsEvent event) {
-        OpenMenuCommand.register(event.getDispatcher());
+    private void doClientStuff(final FMLClientSetupEvent event) {
+        // Клиентские настройки (если требуются)
     }
 
-    // События для сервера
+    private void onConfigLoaded(final ModConfigEvent.Loading event) {
+        if (event.getConfig().getSpec() == NeAgeConfig.COMMON_CONFIG) {
+            // Регистрация всех объектов в зависимости от конфигурации
+            RegistrationHandler.registerAll();
+        }
+
+        }
+
     @Mod.EventBusSubscriber(modid = NeAge.MOD_ID)
     public static class ModEvents {
-
         @SubscribeEvent
         public static void onRegisterCommands(RegisterCommandsEvent event) {
             OpenMenuCommand.register(event.getDispatcher());
-        }
+        }}
 
-        @SubscribeEvent
-        public static void onCommonSetup(FMLCommonSetupEvent event) {
-            // Другие настройки
-        }
-    }
-}
+
